@@ -1,0 +1,8 @@
+width = 600
+height = 400
+location = center
+show_icons = true
+matching = fuzzy
+term = alacritty
+prompt = Run:
+hide_scrollbar = false

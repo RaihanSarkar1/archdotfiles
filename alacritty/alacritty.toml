@@ -1,0 +1,34 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/cyberpunk.toml"
+]
+
+[window]
+opacity = 0.9
+padding = { x = 10, y = 10}
+
+[font]
+size = 13.0
+
+[font.bold]
+family = "SpaceMono Nerd Font Propo"
+style = "Regular"
+
+[font.bold_italic]
+family = "SpaceMono Nerd Font Propo"
+style = "Bold Italic"
+
+[font.italic]
+family = "SpaceMono Nerd Font Propo"
+style = "Italic"
+
+[font.normal]
+family = "SpaceMono Nerd Font Mono"
+style = "Bold"
+
+[keyboard]
+bindings = [
+   { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" },
+   { key= "V", mods= "Control", action= "Paste" },
+   { key= "C", mods= "Control", action= "Copy" }
+]

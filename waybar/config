@@ -1,0 +1,94 @@
+{
+  "layer": "top",
+  "modules-left": ["sway/workspaces", "sway/mode"],
+  "modules-center": ["clock"],
+  "modules-right": ["custom/timer","network", "pulseaudio","group/power"],
+  "clock": {
+    "format-alt": "{:%a, %d. %b  %H:%M}"
+  },
+  "network": {
+    "format-wifi": "󰤨 {essid} ({signalStrength})%",
+    "format-ethernet": "󰈀 Wired",
+    "format-disconnected": "󰤮 Disconnected",
+  },
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-muted": "󰸈 Muted",
+    "format-icons": [" ", " ", "  "]
+  },
+  "sway/workspaces":{
+    "format": "{name}",
+    "active-only": false,
+    "persistent_workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": [],
+      "7": [],
+      "8": [],
+      "9": [],
+      "10": []
+        },
+    },
+
+  "sway/mode": {
+	  "format": " {}",
+	  "max-length": 50
+  },
+
+  "group/power": {
+    "rotate": 90,
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "power-drawer",
+      "transition-left-to-right": true,
+      "click-to-reveal": true
+    },
+    "modules": [
+      "custom/power",
+      "custom/shutdown",
+      "custom/reboot"
+    ]
+  },
+
+  "custom/power": {
+    "format": "  "
+  },
+
+  "custom/shutdown": {
+    "format": "  Shutdown ",
+    "on-click": "~/.config/waybar/scripts/shutdown.sh",
+    "tooltip": false
+  },
+
+  "custom/reboot": {
+    "format": " 󰜉 Reboot",
+    "on-click": "~/.config/waybar/scripts/reboot.sh",
+    "tooltip": false
+  },
+  "custom/timer": {
+    "exec": "~/.scripts/waybar/waybar_timer hook",
+    "exec-on-event": false,
+    "return-type": "json",
+    "format": "{icon} {0}",
+    "format-icons": {
+        "standby": "STANDBY",
+        "running": "RUNNING",
+        "paused": "PAUSE"
+    },
+    "on-click": "~/.scripts/waybar/waybar_timer new 25 'notify-send \"Session finished\"'",
+    "on-click-middle": "~/.scripts/waybar/waybar_timer cancel",
+    "on-click-right": "~/.scripts/waybar/waybar_timer togglepause",
+    "on-scroll-up": "~/.scripts/waybar/waybar_timer increase 60 || ~/.scripts/waybar/waybar_timer new 1 'notify-send -u critical \"Timer expired\"'",
+    "on-scroll-down": "~/.scripts/waybar/waybar_timer decrease 60",
+    "tooltip": "Left Click: Start 25min timer\nMiddle Click: Cancel timer\nRight Click: Toggle pause\nScroll Up: Increase timer by 1min\nScroll Down: Decrease timer by 1min"
+    }
+}
+{
+  "style": "~/.config/waybar/style.css",
+  // ... other settings ...
+}
+

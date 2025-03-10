@@ -1,0 +1,89 @@
+#waybar {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+}
+* {
+        font-family: "BitstromWera Nerd Font", "Symbols Nerd Font";
+        font-size: 14px; /* Adjust as needed */
+}
+
+#clock {
+  padding: 0 10px;
+}
+
+#battery {
+  padding: 0 10px;
+}
+
+#sway-mode {
+  color: orange;
+}
+
+#window {
+  padding: 0 10px;
+}
+
+#workspaces button {
+  color: white; 
+  padding: 0 10px; /* Adjust padding as needed */
+  min-width: 20px; /* Set a minimum width */
+  font-size: 14px; /* Set a fixed font size */
+  margin: 0 0px; /* Adjust margin between buttons */
+  border-radius: 5px; /* Optional: Rounded corners */
+}
+
+
+#workspaces button.focused:hover, #workspaces button:hover{
+  color: #FF4A57;
+}
+
+#workspaces button.focused {
+  padding: 0 10px;
+  font-weight: bold;
+  color: #00FFFF;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid #00FFFF;
+}
+
+#custom-power{
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#network, #pulseaudio, #custom-shutdown , #custom-reboot, #custom-power{
+  padding: 0 10px;
+}
+
+
+.power-drawer {
+    margin-right: 10px;
+    border: 1px solid #00FFFF;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#custom-power{
+  color: #00FFFF;
+}
+#custom-power:hover{
+  color: #ED1E79;
+}
+
+#network:hover, #pulseaudio:hover {
+  padding: 0 10px;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+}
+
+#custom-shutdown:hover , #custom-reboot:hover{
+  background-color: #00FFFF;
+  border-radius: 5px;
+  color: black;
+}
+
+.timer {
+    background-color: #ffee82;
+    color: #242424;
+    margin: 0 10px;
+    padding: 0 10px;
+}

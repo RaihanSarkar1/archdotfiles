@@ -1,0 +1,85 @@
+#Default mod key
+set $mod Mod4
+
+input type:keyboard xkb_numlock enabled
+
+seat seat0 xcursor_theme Adwaita 40
+
+#Terminal
+bindsym $mod+Return exec alacritty
+bindsym $mod+t exec alacritty
+
+#Start Waybar
+exec ~/.scripts/waybar/waybar_timer serve
+exec waybar
+
+#Workspaces
+set $workspace1 1
+set $workspace2 2
+set $workspace3 3
+
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+
+#Reload sway config
+bindsym $mod+Shift+r reload
+
+
+#Start apps
+bindsym $mod+e exec thunar
+bindsym $mod+Space exec wofi 
+bindsym $mod+Shift+f exec firefox
+bindsym $mod+z exec transmission-gtk
+
+#Change focus
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+k focus up
+bindsym $mod+j focus down
+
+# Change split
+bindsym $mod+Shift+h splith
+bindsym $mod+Shift+v splitv
+
+# Change layout
+bindsym $mod+s layout toggle
+bindsym $mod+a layout tabbed
+
+# Change layout mode
+bindsym $mod+m floating toggle
+
+# Switch workspace
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# Move container to next workspace
+bindsym $mod+Shift+right move container to workspace next
+bindsym $mod+Shift+left move container to workspace prev
+bindsym $mod+Shift+2 move container to workspace 2
+
+# Move focused container
+bindsym $mod+right move right
+bindsym $mod+left move left
+bindsym $mod+up move up
+bindsym $mod+down move down
+#Change volume
+
+bindsym $mod+0 exec wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+bindsym $mod+9 exec wpctl set-volume -l @DEFAULT_AUDIO_SINK@ 5%-
+bindsym $mod+8 exec wpctl set-mute -l @DEFAULT_AUDIO_SINK@ toggle
+
+exec systemctl --user import-environment WAYLAND_DISPLAY
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY
+
+bindsym $mod+x exec sway exit
+exec --no-startup-id swaybg -i /home/raihan/Downloads/wallpaper/super-cars-on-japan-streets-ey-1920x1200.jpg -m fill
+# Quick screenshot via Grim and Slurp, Wofi
+bindsym $mod+Shift+s exec zsh -c 'filename=$(wofi -d --allow-empty --lines 1 --prompt "Enter the screenshot name:"); slurp | grim -g - ~/Pictures/Screenshots/$filename.png'
+
+# Change default border style
+default_border normal
+# Changing color of the sway windows
+bindsym $mod+Shift+1 border toggle
+font pango:BitstromWera Nerd Font 11
+

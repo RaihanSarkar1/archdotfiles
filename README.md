@@ -20,5 +20,3 @@ Section "Device"
     Option "AccelMethod" "sna" #default
     Option "AccelMethod" "uxa" #fallback if failed
 EndSection
-
-

@@ -12,6 +12,8 @@ Waybar and Wofi for Sway WM
 
 Most effective tear fix for my Intel chip is as follows
 the following was written in /etc/X11/xorg/conf.d/10-intel.conf
+Code:
+```
 Section "Device"
     Identifier "Intel Graphics"
     Driver "intel"
@@ -20,3 +22,4 @@ Section "Device"
     Option "AccelMethod" "sna" #default
     Option "AccelMethod" "uxa" #fallback if failed
 EndSection
+```

@@ -1,0 +1,36 @@
+[looper]
+full_text=  Files
+command=thunar ~
+min_width=40
+align=center
+
+[colorpicker]
+full_text=  colorpicker
+command=gpick
+min_width=40
+align=center
+
+
+[screensnip]
+full_text= 󰴱 screenshot
+command=maim -s ~/Pictures/screenshot-$(date +%F-%T).png
+min_width=40
+align=center
+
+[volume]
+command=~/.config/i3blocks/scripts/volume.sh
+interval=1
+signal=10
+min_width=60
+align=center
+
+[ethernet]
+command=~/.config/i3blocks/scripts/network.sh
+interval=5
+
+[powermenu]
+full_text= 
+min_width=40
+align=left
+command=~/.config/rofi/powermenu/type-2/powermenu.sh
+color=#E6277E

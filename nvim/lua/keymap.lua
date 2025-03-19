@@ -29,11 +29,24 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Custom keymaps
+--
+-- Open netrw
 vim.keymap.set("n", "<leader>ee", vim.cmd.Ex)
 vim.keymap.set("i", "jj", "<Esc>")
-
+-- Save the buffer
 vim.keymap.set('n', '<C-s>', ':w<CR>')
 vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>')
+-- Quit
 vim.keymap.set('n', '<leader>q', ':q<CR>')
+-- Select all
 vim.keymap.set('n', '<C-a>', 'ggv<S-g>')
+-- Delete a word backwards
+vim.keymap.set('n', 'dw', 'viwd')
+-- Shift-s substitue line 
+
+-- Diagnostics
+vim.keymap.set('n', '<C-d>', function ()
+	vim.diagnostic.goto_next()
+end, opts)
 

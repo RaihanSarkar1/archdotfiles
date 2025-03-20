@@ -55,10 +55,25 @@ return {
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert {
           -- Select the [n]ext item
-          ['<Tab>'] = cmp.mapping.select_next_item(),
+	  ["<Tab>"] = cmp.mapping(function(fallback)
+	      if cmp.visible() then
+		cmp.select_next_item()
+	      elseif luasnip.expand_or_jumpable() then
+		luasnip.expand_or_jump()
+	      else
+		fallback()
+	      end
+	    end, { "i", "s" }),
           -- Select the [p]revious item
-          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+	      if cmp.visible() then
+		cmp.select_prev_item()
+	      elseif luasnip.jumpable(-1) then
+		luasnip.jump(-1)
+	      else
+		fallback()
+	      end
+	    end, { "i", "s" }),
           -- Scroll the documentation window [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),

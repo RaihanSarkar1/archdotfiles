@@ -5,8 +5,8 @@ echo "BLOCK_BUTTON: $BLOCK_BUTTON" > /tmp/i3blocks-volume-debug.log
 
 # Custom volume control script for i3blocks using wpctl (PipeWire)
 case $BLOCK_BUTTON in
-    4) wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ ;;  # Scroll up: increase volume
-    5) wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- ;;  # Scroll down: decrease volume
+    4) wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ ;;  # Scroll up: increase volume
+    5) wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- ;;  # Scroll down: decrease volume
     1) wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ;; # Left click: toggle mute
 esac
 

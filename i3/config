@@ -17,17 +17,13 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:BitstromWera Nerd Font Mono 10
+font pango:DejaVuSansM Nerd Font Propo 11
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 # Start compositor
-exec --no-startup-id picom -b
-# Mouse scroll script
-# exec_always --no-startup-id ~/.config/i3/i3-mouse-workspace-scroll.sh
-
-
+exec --no-startup-id picom -b --config ~/.config/picom/picom.conf
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
@@ -37,12 +33,10 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-# exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 
 # autotiling
 exec_always --no-startup-id autotiling
-# polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -57,12 +51,14 @@ default_border pixel
 
 # Hide borders smartly when only on window is there
 hide_edge_borders smart
-
+# Gaps
+gaps inner 5
+gaps outer 0
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # The right button toggles floating
-bindsym button3 floating toggle
+bindsym --whole-window $mod+button3 floating toggle
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
@@ -70,25 +66,40 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+t exec i3-sensible-terminal
-bindsym $mod+i exec i3-sensible-terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+q kill
 
+# The middle button and a modifier over any part of the window kills the window
+bindsym --whole-window $mod+button2 kill
+
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
 # A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+bindsym $mod+d exec "rofi -show drun"
+set $alt Mod1
+bindsym $alt+Tab exec "rofi -show window"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
+# Enable focus stealing
+for_window [class="Rofi"] floating enable, focus
+
+
+# Full-screen screenshot
+bindsym Print exec maim ~/Pictures/screenshot-$(date +%F-%T).png
+
+# Region selection screenshot
+bindsym $mod+Shift+s exec maim -s ~/Pictures/screenshot-$(date +%F-%T).png
+
+# Copy region screenshot to clipboard
+bindsym $mod+Shift+` exec maim -s | xclip -selection clipboard -t image/png
+
 # Apps
 bindsym $mod+e exec thunar
-bindsym $mod+Space exec wofi 
 bindsym $mod+b exec chromium
-bindsym $mod+m exec mpv
-bindsym $mod+z exec transmission-gtk
-bindsym $mod+Shift+s exec screenshot.sh
+bindsym $mod+m exec mpv --force-window --idle
 
 # change focus
 bindsym $mod+h focus left
@@ -178,7 +189,13 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Switch workspace
-bindsym $mod+Tab workspace next
+# Switch window/workspace with mod+scroll and mod+shift scroll
+bindsym --whole-window --border $mod+Shift+button4 focus left
+bindsym --whole-window --border $mod+Shift+button5 focus right
+bindsym --whole-window --border $mod+button4 workspace prev
+bindsym --whole-window --border $mod+button5 workspace next
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Shift+i workspace next
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -230,10 +247,20 @@ mode "$mode_system" {
 }
 
 bindsym $mod+x mode "$mode_system"
-for_window [title="lxappearance"] floating enable
-exec --no-startup-id feh --bg-fill ~/Downloads/wallpaper/nordmountain.jpg
+exec --no-startup-id feh --bg-fill ~/wallpapers/win11.jpg
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-#bar {
-       #status_command i3status
-#}
+bar {
+       status_command i3blocks
+     
+       font pango:DejaVuSansM Nerd Font, Icons 11
+       colors {
+		background #1E1F29
+		statusline #BD93F9 
+
+		focused_workspace  #3E3F44 #BD93F9
+		active_workspace   #ffffff #333333
+		inactive_workspace #888888 #222222
+		urgent_workspace   #ffffff #900000
+	    }
+}

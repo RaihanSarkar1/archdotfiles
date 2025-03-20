@@ -188,6 +188,7 @@ return {
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
+
       --  Add any additional override configuration in the following tables. Available keys are:
       --  - cmd (table): Override the default command used to start the server
       --  - filetypes (table): Override the default list of associated filetypes for the server
@@ -207,6 +208,8 @@ return {
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
+	
+	
 
         lua_ls = {
           -- cmd = { ... },
@@ -223,6 +226,8 @@ return {
           },
         },
       }
+
+		
 
       -- Ensure the servers and tools above are installed
       --
